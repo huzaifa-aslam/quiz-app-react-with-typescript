@@ -1,0 +1,11 @@
+.result {
+    width: 50%;
+    /* text-align: center; */
+    margin: 0 auto;
+    background-color: grey;
+    color: aquamarine;
+    margin-top: 82px;
+    /* display: flex; */
+    padding: 10px;
+    box-shadow: 5px 5px 14px dimgrey;
+}

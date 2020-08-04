@@ -1,52 +1,66 @@
-import React,{useEffect,useState, FormEvent} from 'react';
-import {Quiz,Question_type} from './types/Types'
+import React,{useEffect,useState} from 'react';
 import './App.css';
-import {FetchQuiz} from './services'
-import QuestionCard from './components/QuestionCard'
+import {QuizData} from './services'
+import {Question_type} from './types/QuizType'
+import {QuestionCard,Result,GetName} from './components'
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
-  let  [quiz,setQuiz]=useState<Question_type[]>([])
-  let  [currentStep,setCurrentStep]=useState(0)
-  let  [userInput,setUserInput]=useState("")
-  let  [score,setScore]=useState(0)
+
+let [quiz,setQuiz]=useState<Question_type[]>([])
+let [currentQuestion,setcurrentQuestion]=useState(0)
+let [ans,setAnswer]=useState("")
+let [score,setScore]=useState(0)
+let [name,setname]=useState('')
+let [showScore,setshowScore]=useState(false)
+
   useEffect(()=>{
-   async function FetchData(){
-     const question:Question_type[]=await FetchQuiz(5,"easy")
-     setQuiz(question)
-     console.log( 'question',question)
-   }
-   FetchData()
+
+    const getApi=async()=>{
+      const quizData:Question_type[]=await QuizData("easy",3)
+      setQuiz(quizData)
+      console.log(quizData)
+    }
+    getApi()
   },[])
 
-  function handlerSubmit(e:React.FormEvent<EventTarget>,ans:string){
-    e.preventDefault()
-    const myAns:Question_type=quiz[currentStep]
-if(ans===myAns.correct_answer){
-  setScore(++score)
+
+function getUserName(e:React.FormEvent<EventTarget>,uName:string){
+  e.preventDefault()
+  setname(uName)
+  console.log(uName)
 }
-    if(currentStep!==quiz.length-1){
 
-      setCurrentStep(++currentStep)
-
-
-    }else{
-      setCurrentStep(0)
-      alert(`quiz is completed`)
-
-      alert(`your score is ${score}`)
-      setScore(0)
-
-    }
-    console.log(myAns.correct_answer)
+  function handleSubmit(e:React.FormEvent<EventTarget>,answer:any){
+    e.preventDefault()
+    setAnswer(answer)
     console.log(ans)
+
+    if(answer===quiz[currentQuestion].correct_answer){
+      setScore(++score)
+      console.log(score)
+    }
+    if(currentQuestion!==quiz.length-1){
+
+      setcurrentQuestion(++currentQuestion)
+    }
+    else{
+      //alert(`quiz is completed`)
+      //setcurrentQuestion(0)
+      setshowScore(true)
+    }
   }
 
-  if(!quiz.length)
-    return <h3>Loading...</h3>
+if(!quiz.length){
+  return <h3>Loading....</h3>
+}
 
   return (
     <div className="App">
-      <QuestionCard question={quiz[currentStep].question} option={quiz[currentStep].option} callback={handlerSubmit}/>
+    {name==="" ? <GetName getName={getUserName}/> : ""}
+    {/* <GetName getName={getUserName}/> */}
+     { !showScore ?  <QuestionCard callback={handleSubmit} userName={name}  question={quiz[currentQuestion].question} options={quiz[currentQuestion].options} /> :  <Result score={score} totalQuestion={quiz.length} userName={name}/>}
+
     </div>
   );
 }

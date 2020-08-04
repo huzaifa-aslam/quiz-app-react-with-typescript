@@ -1,1 +1,1 @@
-export {default as FetchQuiz} from './service'
+export {default as QuizData} from './QuizData'

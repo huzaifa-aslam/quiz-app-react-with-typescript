@@ -1,41 +1,52 @@
 import React,{useState} from 'react'
-import {questionProps} from './../types/Types'
+import {questionProp} from './../types/QuizType'
 
-const QuestionCard=({question,option,callback}:questionProps)=>{
-let [answer,setAnswer]=useState('')
-const userAnswer=(e:any)=>{
-    setAnswer(e.target.value)
-   //console.log(e.target.value)
+import './QuestionCard.css'
 
+
+
+
+const QuestionCard=({question,options,callback,userName}:questionProp)=>{
+
+  let [answer,setAnswer]=useState("")
+
+function getValue(e:any){
+  setAnswer(e.target.value)
 }
 
-    return(
-       <div>
-           <div>
-           {question}
-           </div>
-        <div>
-                <form onSubmit={(e:React.FormEvent<EventTarget>)=>{callback(e,answer)}}>
-                    {
-                        // let randomOption=option
-                        option.map((item:string,ind:number)=>{
-                            return (
-                                <div key={ind}>
-                                <input type="radio" required={true} value={item} checked={answer===item} onChange={userAnswer}  ></input>
-                               {item}
-                                </div>
 
-                            )
-                        })
-                    }
-                    <button type="submit">Submit</button>
-                </form>
+    return (
+      <section className="cardSection">
+        <div className="card">
+         <h3>  Developed By<br/> Huzaifa Aslam</h3>
 
+<form onSubmit={(e:React.FormEvent<EventTarget>)=>{callback(e,answer)}}>
+{question}
+           {options.map((val:string,ind:number)=>{
+           return(
+             <div key={ind}>
+              <input
+                type="radio"
+                name="option"
+                value={val}
+                required
+                onChange={getValue}
+                checked={answer===val}
+              />
+              <label>{val}</label>
+
+
+              </div>
+           )
+         })}
+         <div className="nextBtn">
+         <button type="submit">Next</button>
+
+         </div>
+
+         </form>
         </div>
-
-
-       </div>
-    )
-
+        </section>
+      );
 }
-export default QuestionCard
+export default QuestionCard;

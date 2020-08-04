@@ -1,0 +1,37 @@
+.card {
+    width: 65%;
+    margin: 0 auto;
+    background-color: white;
+    height: 346px;
+    box-shadow: 4px 5px 16px lightyellow;
+    padding-top: 20px;
+    /* margin-top: 65px; */
+}
+
+.card form {
+    text-align: left;
+    padding-left: 15px;
+}
+
+.cardSection {
+    height: 100vh;
+    background-color: gray;
+    padding-top: 120px;
+}
+
+
+/* .nextBtn {
+    text-align: center;
+} */
+
+button {
+    padding: 8px;
+    width: 20%;
+    background-color: green;
+    color: white;
+}
+
+button:hover {
+    background-color: #a71f1f;
+    transition: 0.3s
+}
