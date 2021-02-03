@@ -44,7 +44,7 @@ function getUserName(e:React.FormEvent<EventTarget>,uName:string){
       setcurrentQuestion(++currentQuestion)
     }
     else{
-      //alert(`quiz is completed`)
+    
       //setcurrentQuestion(0)
       setshowScore(true)
     }
