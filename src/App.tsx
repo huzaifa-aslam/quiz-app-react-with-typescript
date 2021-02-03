@@ -34,8 +34,7 @@ function getUserName(e:React.FormEvent<EventTarget>,uName:string){
   function handleSubmit(e:React.FormEvent<EventTarget>,answer:any){
     e.preventDefault()
     setAnswer(answer)
-    console.log(ans)
-
+    
     if(answer===quiz[currentQuestion].correct_answer){
       setScore(++score)
       console.log(score)
