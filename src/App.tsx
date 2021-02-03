@@ -19,7 +19,7 @@ let [showScore,setshowScore]=useState(false)
     const getApi=async()=>{
       const quizData:Question_type[]=await QuizData("easy",3)
       setQuiz(quizData)
-      console.log(quizData)
+      
     }
     getApi()
   },[])
