@@ -52,7 +52,7 @@ function getUserName(e:React.FormEvent<EventTarget>,uName:string){
   }
 
 if(!quiz.length){
-  return <h3>Loading....</h3>
+  return <h3>Please wait....</h3>
 }
 
   return (
