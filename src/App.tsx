@@ -57,7 +57,7 @@ if(!quiz.length){
   return (
     <div className="App">
     {name==="" ? <GetName getName={getUserName}/> : ""}
-    {/* <GetName getName={getUserName}/> */}
+    
      { !showScore ?  <QuestionCard callback={handleSubmit} userName={name}  question={quiz[currentQuestion].question} options={quiz[currentQuestion].options} /> :  <Result score={score} totalQuestion={quiz.length} userName={name}/>}
 
     </div>
